@@ -1,5 +1,5 @@
 {
-	"name": "empmaster_csv",
+	"name": "agencymaster_csv",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "EmpMaster.csv",
+				"fileName": "AgencyMaster.csv",
 				"folderPath": "dirpayrollfiles",
 				"fileSystem": "adlsnsycpayroll-jeanpaul-d"
 			},
@@ -21,15 +21,11 @@
 		},
 		"schema": [
 			{
-				"name": "EmployeeID",
+				"name": "AgencyID",
 				"type": "String"
 			},
 			{
-				"name": "LastName",
-				"type": "String"
-			},
-			{
-				"name": "FirstName",
+				"name": "AgencyName",
 				"type": "String"
 			}
 		]
