@@ -1,0 +1,10 @@
+{
+	"name": "AzureSynapseAnalytics2",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"connectionString": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=project5-synapse-jean-paul-d.sql.azuresynapse.net;Initial Catalog=synapse_dedicated"
+		}
+	}
+}
