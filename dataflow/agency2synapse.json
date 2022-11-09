@@ -1,5 +1,5 @@
 {
-	"name": "emp2synapse",
+	"name": "agency2synapse",
 	"properties": {
 		"description": "step 4.3",
 		"type": "MappingDataFlow",
@@ -7,37 +7,35 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "empmaster_csv",
+						"referenceName": "agencymaster_csv",
 						"type": "DatasetReference"
 					},
-					"name": "employeecsv"
+					"name": "agencycsv"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "NYC_Payroll_EMP_MD",
+						"referenceName": "NYC_Payroll_AGENCY_MD",
 						"type": "DatasetReference"
 					},
-					"name": "EMPsynapse"
+					"name": "AGENCYsynapse"
 				}
 			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          EmployeeID as string,",
-				"          LastName as string,",
-				"          FirstName as string",
+				"          AgencyID as string,",
+				"          AgencyName as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> employeecsv",
-				"employeecsv sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false) ~> agencycsv",
+				"agencycsv sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          EmployeeID as string,",
-				"          LastName as string,",
-				"          FirstName as string",
+				"          AgencyID as string,",
+				"          AgencyName as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -48,7 +46,7 @@
 				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> EMPsynapse"
+				"     errorHandlingOption: 'stopOnFirstError') ~> AGENCYsynapse"
 			]
 		}
 	}
