@@ -17,6 +17,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"dataflow": {
+						"referenceName": "payrollToSQLDB",
+						"type": "DataFlowReference"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
@@ -144,6 +148,13 @@
 					"dataflow": {
 						"referenceName": "SQLDB_to_synapse",
 						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "AzureDataLakeStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnsycpayroll-jeanpaul-d/dirstaging"
 					},
 					"compute": {
 						"coreCount": 8,
