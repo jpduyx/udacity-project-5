@@ -1,5 +1,5 @@
 {
-	"name": "nycpayroll_csv",
+	"name": "nycpayrollCURRYEAR_csv",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",

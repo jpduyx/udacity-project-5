@@ -7,7 +7,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "nycpayroll_csv",
+						"referenceName": "nycpayrollCURRYEAR_csv",
 						"type": "DatasetReference"
 					},
 					"name": "payrollData"
