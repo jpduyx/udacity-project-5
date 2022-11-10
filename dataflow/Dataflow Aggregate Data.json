@@ -20,7 +20,15 @@
 					"name": "datalakeHistoryPayrollData"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "table_synapse_nycpayroll_sumary",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "union1"
@@ -30,10 +38,16 @@
 					"description": "filter on fiscal year"
 				},
 				{
-					"name": "totalPayd"
+					"name": "totalPaid"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     level as integer (FiscalYear)",
+				"}",
 				"source(output(",
 				"          FiscalYear as integer,",
 				"          PayrollNumber as integer,",
@@ -85,7 +99,27 @@
 				"     ignoreNoFilesFound: false) ~> datalakeHistoryPayrollData",
 				"sqldbpayrolldata, datalakeHistoryPayrollData union(byName: true)~> union1",
 				"union1 filter(ERROR_FUNCTION('toInteger(FiscalYear) => $dataflow_param_fiscalyear__NEW_LINE_N____NEW_LINE_N__')) ~> fiscalyearFilter",
-				"fiscalyearFilter derive() ~> totalPayd"
+				"fiscalyearFilter derive(TotalPayd = RegularGrossPaid+TotalOTPaid+TotalOtherPay) ~> totalPaid",
+				"totalPaid aggregate(groupBy(AgencyName,",
+				"          FiscalYear)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          FiscalYear as integer,",
+				"          AgencyName as string,",
+				"          TotalPaid as double",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
