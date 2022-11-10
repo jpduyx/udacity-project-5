@@ -165,9 +165,8 @@
 			}
 		],
 		"parameters": {
-			"dataflowLevel_fiscalYear": {
-				"type": "int",
-				"defaultValue": 2021
+			"dataflow_param_fiscalyear": {
+				"type": "int"
 			}
 		},
 		"annotations": []
