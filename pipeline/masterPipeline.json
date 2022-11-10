@@ -164,6 +164,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"dataflowLevel_fiscalYear": {
+				"type": "int",
+				"defaultValue": 2021
+			}
+		},
 		"annotations": []
 	}
 }
