@@ -28,6 +28,9 @@
 				{
 					"name": "fiscalyearFilter",
 					"description": "filter on fiscal year"
+				},
+				{
+					"name": "totalPayd"
 				}
 			],
 			"scriptLines": [
@@ -81,7 +84,8 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> datalakeHistoryPayrollData",
 				"sqldbpayrolldata, datalakeHistoryPayrollData union(byName: true)~> union1",
-				"union1 filter(ERROR_FUNCTION('toInteger(FiscalYear) => $dataflow_param_fiscalyear')) ~> fiscalyearFilter"
+				"union1 filter(ERROR_FUNCTION('toInteger(FiscalYear) => $dataflow_param_fiscalyear__NEW_LINE_N____NEW_LINE_N__')) ~> fiscalyearFilter",
+				"fiscalyearFilter derive() ~> totalPayd"
 			]
 		}
 	}
