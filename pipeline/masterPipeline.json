@@ -4,7 +4,7 @@
 		"description": "this master pipeline runs all the dataflows",
 		"activities": [
 			{
-				"name": "loadpayrolldataintoSQLDBtransactionTable",
+				"name": "load2021payrolldataintoSQLDBtransactionTable",
 				"description": "step 4.2",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
@@ -29,7 +29,7 @@
 				}
 			},
 			{
-				"name": "csv2synapse",
+				"name": "emp2synapse",
 				"description": "step 4.3",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
@@ -45,6 +45,77 @@
 					"dataflow": {
 						"referenceName": "emp2synapse",
 						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "AzureDataLakeStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnsycpayroll-jeanpaul-d/dirstaging"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "title2synapse",
+				"description": "step 4.3-4-5",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "title2synapse",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "AzureDataLakeStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnsycpayroll-jeanpaul-d/dirstaging"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "agency2synapse",
+				"description": "step 4.3-4-5",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "agency2synapse",
+						"type": "DataFlowReference"
+					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "AzureDataLakeStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "adlsnsycpayroll-jeanpaul-d/dirstaging"
 					},
 					"compute": {
 						"coreCount": 8,
